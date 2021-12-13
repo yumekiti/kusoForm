@@ -17,7 +17,7 @@
                 <span class="no">行かない</span>
             </div>
         </v-btn>
-        <p class="next">Please <u>click</u> <span @click="next()">HERE</span> to GO to the <span style="color: blue;">next page</span></p>
+        <p class="next">Please <u>click</u> <span @click="next()">HERE</span> to GO to the <span style="color: #0000A5;">next page</span></p>
     </div>
 </template>
 <script>
@@ -55,8 +55,13 @@ div{
 }
 
 .next{
-    color: #999;
-    margin: 30px;
+    color: #aaa;
+    position: absolute;
+    bottom: 0%;
+    left: 50%;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
 }
 
 </style>
