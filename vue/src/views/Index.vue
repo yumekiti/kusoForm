@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1 id="title">kusoFORM</h1>
-        <p>
+        <p class="detail">
             フォーム送信できたらゲームクリアです。<br>
             短時間で送信ができるよう頑張ってください。
         </p>
@@ -62,6 +62,10 @@ div{
     transform: translateX(-50%);
     -webkit-transform: translateX(-50%);
     -ms-transform: translateX(-50%);
+}
+
+.detail{
+    font-size: 30px;
 }
 
 </style>
