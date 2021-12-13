@@ -1,9 +1,5 @@
 dc := docker-compose -f ./docker/docker-compose.yml
 
-.PHONY: init
-init:
-	$(dc) up -d --build
-
 .PHONY: up
 up:
 	$(dc) up -d --build
