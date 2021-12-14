@@ -4,6 +4,9 @@
         <v-container class="beside">
             <div class="input">
                 <v-row>
+                    <v-spacer
+                        v-if="namePosition % 3 == 1"
+                    ></v-spacer>
                     <v-col cols="4">
                         <v-row>
                             <v-spacer
@@ -21,14 +24,19 @@
                             ></v-spacer>
                         </v-row>
                     </v-col>
+                    <v-spacer
+                        v-if="namePosition % 2 == 0"
+                    ></v-spacer>
                 </v-row>
                 <v-row>
                     <v-spacer
-                        v-if="emailPosition % 2 == 0"
+                        v-if="namePosition % 3 == 1"
                     ></v-spacer>
                     <v-col cols="4">
                         <v-row>
-                            <v-spacer></v-spacer>
+                            <v-spacer
+                                v-if="emailPosition % 2 == 0"
+                            ></v-spacer>
                             <v-col cols="3">
                                 <v-text-field
                                     placeholder="Email"
@@ -41,10 +49,14 @@
                             ></v-spacer>
                         </v-row>
                     </v-col>
-                    <v-spacer></v-spacer>
+                    <v-spacer
+                        v-if="emailPosition % 2 == 0"
+                    ></v-spacer>
                 </v-row>
                 <v-row>
-                    <v-spacer></v-spacer>
+                    <v-spacer
+                        v-if="emailPosition % 3 == 1"
+                    ></v-spacer>
                     <v-col cols="4">
                         <v-row>
                             <v-spacer
@@ -62,19 +74,36 @@
                             ></v-spacer>
                         </v-row>
                     </v-col>
+                    <v-spacer
+                        v-if="emailPosition % 2 == 0"
+                    ></v-spacer>
                 </v-row>
             </div>
         </v-container>
         <v-container>
             <v-row>
+                <p v-html="this.errorText"></p>
                 <v-spacer></v-spacer>
                 <v-col
-                    cols="3"
+                    cols="1"
                 >
                     <v-btn
-                        color="primary"
+                        @click="this.send"
+                        color="red darken-1"
+                        style="font-size: 10px"
                     >
                         send
+                    </v-btn>
+                </v-col>
+                <v-col
+                    cols="1"
+                >
+                    <v-btn
+                        @click="this.clear"
+                        color="primary"
+                        style="font-size: 10px"
+                    >
+                        clear
                     </v-btn>
                 </v-col>
             </v-row>
@@ -92,17 +121,46 @@ export default {
             emailPosition: 0,
             password: 'Password',
             passwordPosition: 0,
+            error: true,
+            errorText: '',
         }
     },
     methods: {
+        send(){
+            this.validate(this.email, this.password)
+            if(!this.error){
+                this.$router.push({
+                    name: 'Cleared',
+                    params: {
+                        name: this.name,
+                        email: this.email,
+                        password: this.password,
+                    },
+                });
+            }else{
+                this.errorText = 'バリデーションエラー<br>半角英数字8-15文字の正規表現<br>emailの正規表現'
+            }
+        },
         rnd(){
             this.namePosition = Math.floor(Math.random() * (11 - 7)) + 1
             this.emailPosition = Math.floor(Math.random() * (11 - 7)) + 1
             this.passwordPosition = Math.floor(Math.random() * (11 - 7)) + 1
-        }
+        },
+        clear(){
+            this.name = ''
+            this.email = ''
+            this.password = ''
+        },
+        validate(email, password){
+            // emailの正規表現
+            const emailRegexp = /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}\.[A-Za-z0-9]{1,}$/;
+            // 半角英数字8-15文字の正規表現
+            const passwordRegexp = /^(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,15}$/i;
+            emailRegexp.test(email) ? this.error = false: this.error = true;
+            passwordRegexp.test(password) ? this.error = false: this.error = true;
+        },
     },
     created() {
-        this.rnd()
         setInterval(() =>this.rnd(), 1000);
     },
 }

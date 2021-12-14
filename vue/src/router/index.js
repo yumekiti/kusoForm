@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Index from '../views/Index.vue'
 import Form from '../views/Form.vue'
+import Cleared from '../views/Cleared.vue'
 
 Vue.use(VueRouter)
 
@@ -11,6 +12,11 @@ const routes = [
     path: '/',
     name: 'Index',
     component: Index
+  },
+  {
+    path: '/cleared',
+    name: 'Cleared',
+    component: Cleared
   },
   {
     path: '/form',
