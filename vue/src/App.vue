@@ -5,3 +5,9 @@
     </v-main>
   </v-app>
 </template>
+
+<style>
+*::-webkit-scrollbar{
+  display: none;
+}
+</style>

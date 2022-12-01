@@ -99,6 +99,7 @@
                 >
                     <v-btn
                         @click="this.send"
+                        text
                         color="red darken-1"
                         style="font-size: 10px"
                     >
@@ -110,6 +111,7 @@
                 >
                     <v-btn
                         @click="this.clear"
+                        text
                         color="primary"
                         style="font-size: 10px"
                     >
@@ -270,15 +272,5 @@ div {
 
 .input {
     width: 3000px;
-}
-
-.kiyaku {
-    overflow-y: scroll;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
-.kiyaku::-webkit-scrollbar {
-    display: none;
 }
 </style>
